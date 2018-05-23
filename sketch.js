@@ -1,5 +1,4 @@
-//Instead of lines, draw poles of stacked images. Images match searchwords
-//[cleaning, cooking, caring, supporting, mothering, receivingj];
+// Instead of lines, draw poles of stacked images. Images match searchwords
 
 //
 var r, g, b, unpaid, place, gig, placeRe, gigRe, home;
@@ -33,13 +32,13 @@ function setup() {
 		if (sex[i] == "MEN") {
 			men[i] = unpaid.get(i, 16);
 		} else women[i] = unpaid.get(i, 16);
-
 	}
 }
 
 function draw() {
 	background(255);
-	noFill();
+	strokeCap(SQUARE);
+	strokeWeight(2);
 	let xoff = 0;
 	let yoff = 1;
 	let zoff = 0;
@@ -54,9 +53,12 @@ function draw() {
 	}
 
 	for (var i = 0; i < country.length; i++) {
-		fill(random(127), random(127), random(127), 222);
 		let hor = 16 * i;
-		ellipse(hor, value[i], random(30)); 	
+		let ver = (width/country.length) * i;
+		stroke(random(64), 127, random(127), 127);
+		line(0, ver, men[i], ver); 
+		stroke(127, random(64), random(127), 127);
+		line(width, ver, width - women[i], ver);
 	}
 }
 
