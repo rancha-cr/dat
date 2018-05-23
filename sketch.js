@@ -45,12 +45,20 @@ function draw() {
 	let xoff = 0;
 	let yoff = 1;
 	let zoff = 0;
+	let rand = random(3);
 
 	//loadPixels();
 	//place.loadPixels();
 
-	for (var y = 0; y < height; y += random(512)) {
-		for (var x = 0; x < width; x += random(512)) {
+	for (var y = 0; y < height; y += 127) {
+		for (var x = 0; x < width; x += random(16)) {
+			if (x % 2 == 0){
+				filter(GRAY);
+			} else if (x % 4 == 0) {
+				filter(INVERT);
+			} else if (x % 3 == 0) {
+				filter(ERODE);
+			}
 			image(place, x, y);
 		}
 	}
