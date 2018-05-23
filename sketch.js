@@ -16,9 +16,9 @@ function preload() {
 
 function setup() {
 	createCanvas(900, 675);
-	frameRate(3);
+	frameRate(30);
 
-	place = createVideo('assets/vid-5.mov');
+	place = createVideo('assets/vid-3.mov');
 	place.hide();
 	home = createVideo('assets/vid-2.mov');
 	home.hide();
@@ -33,32 +33,37 @@ function setup() {
 			men[i] = unpaid.get(i, 16);
 		} else women[i] = unpaid.get(i, 16);
 	}
+
+	filter(POSTERIZE, 3);
 }
 
 function draw() {
 	background(255);
 	strokeCap(SQUARE);
 	strokeWeight(2);
+	//filter(BLUR, 3);
 	let xoff = 0;
 	let yoff = 1;
 	let zoff = 0;
 
-	// loadPixels();
-	place.loadPixels();
+	//loadPixels();
+	//place.loadPixels();
 
-	for (var y = 0; y < height; y += 24) {
-		for (var x = 0; x < width; x += 24) {
+	for (var y = 0; y < height; y += random(512)) {
+		for (var x = 0; x < width; x += random(512)) {
 			image(place, x, y);
 		}
 	}
 
 	for (var i = 0; i < country.length; i++) {
-		let hor = 16 * i;
-		let ver = (width/country.length) * i;
-		stroke(random(64), 127, random(127), 127);
-		line(0, ver, men[i], ver); 
-		stroke(127, random(64), random(127), 127);
-		line(width, ver, width - women[i], ver);
+		let hor = (width/country.length) * i;
+		let ver = (height/country.length) * i;
+		//stroke(random(64), 127, random(127), 127);
+		//line(0, ver, men[i], ver);
+		//copy(width/3, height/3, 24, 24, 0, ver, men[i], 4);
+		//stroke(127, random(64), random(127), 127);
+		//line(width, ver, width - women[i], ver);
+		//copy(width/5, height/5, 24, 24, women[i], ver, width, 4);
 	}
 }
 
