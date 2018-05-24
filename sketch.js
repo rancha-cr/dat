@@ -12,6 +12,7 @@ function preload() {
 	// placeRe = loadImage("assets/kyp-2.png");
 	// gig = loadImage("assets/gig.jpg");
 	// gigRe = loadImage("assets/gig-2.png");
+	gig = loadImage('assets/pic-2.jpg');
 }
 
 function setup() {
@@ -46,19 +47,25 @@ function draw() {
 	let yoff = 1;
 	let zoff = 0;
 	let rand = random(3);
+	let masc = men.reduce(function(a, b) {
+		return Math.max(a, b);
+	});
+	let fem = women.reduce(function(a, b) {
+		return Math.max(a, b);
+	});
 
 	//loadPixels();
 	//place.loadPixels();
 
 	for (var y = 0; y < height; y += 127) {
 		for (var x = 0; x < width; x += random(16)) {
-			if (x % 2 == 0){
-				filter(GRAY);
-			} else if (x % 4 == 0) {
-				filter(INVERT);
-			} else if (x % 3 == 0) {
-				filter(ERODE);
-			}
+			//if (x % 2 == 0){
+			//	filter(GRAY);
+			//} else if (x % 4 == 0) {
+			//	filter(INVERT);
+			//} else if (x % 3 == 0) {
+			//	filter(ERODE);
+			//}
 			image(place, x, y);
 		}
 	}
@@ -66,12 +73,16 @@ function draw() {
 	for (var i = 0; i < country.length; i++) {
 		let hor = (width/country.length) * i;
 		let ver = (height/country.length) * i;
+		let him = map(value[i-1], 0, masc, 0, width);
+		let her = map(value[i], 0, fem, 0, height);
 		//stroke(random(64), 127, random(127), 127);
 		//line(0, ver, men[i], ver);
 		//copy(width/3, height/3, 24, 24, 0, ver, men[i], 4);
 		//stroke(127, random(64), random(127), 127);
 		//line(width, ver, width - women[i], ver);
 		//copy(width/5, height/5, 24, 24, women[i], ver, width, 4);
+		
+		blend(gig, 0, 127, 256, 256, 0, 0, width, height, DODGE);
 	}
 }
 
