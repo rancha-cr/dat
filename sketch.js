@@ -15,12 +15,9 @@ function setup() {
 	createCanvas(900, 675);
 	frameRate(30);
 
-	place = createVideo('assets/vid-0.mov');
+	place = createVideo('assets/tr4.mov');
 	place.hide();
-	home = createVideo('assets/vid-2.mov');
-	home.hide();
-	home.size(16, 16);
-	kem = createVideo('assets/lp-3.mov');
+	kem = createVideo('assets/ff4.mov');
 	kem.hide();
 	var rowCount = unpaid.getRowCount();
 
@@ -35,21 +32,10 @@ function setup() {
 }
 
 function draw() {
-	background(255);
-	strokeCap(SQUARE);
-	strokeWeight(2);
 	//filter(BLUR, 3);
 	let xoff = 0;
 	let yoff = 1;
 	let zoff = 0;
-	let rand = random(3);
-	let masc = men.reduce(function(a, b) {
-		return Math.max(a, b);
-	});
-	let fem = women.reduce(function(a, b) {
-		return Math.max(a, b);
-	});
-
 	//loadPixels();
 	//place.loadPixels();
 
@@ -66,26 +52,12 @@ function draw() {
 	//	}
 	//}
 
-	image(kem, 0, 0);
+	image(kem, 0, 0, width, height);
 
-	for (var i = 0; i < country.length; i++) {
-		let hor = (width/country.length) * i;
-		let ver = (height/country.length) * i;
-		let him = map(value[i-1], 0, masc, 0, width);
-		let her = map(value[i], 0, fem, 0, height);
-		//stroke(random(64), 127, random(127), 127);
-		//line(0, ver, men[i], ver);
-		//copy(width/3, height/3, 24, 24, 0, ver, men[i], 4);
-		//stroke(127, random(64), random(127), 127);
-		//line(width, ver, width - women[i], ver);
-		//copy(width/5, height/5, 24, 24, women[i], ver, width, 4);
-		
-		blend(gig, 0, 0, 256, 256, 0, 0, width, height, DIFFERENCE);
-	}
+	blend(place, 0, 0, place.width, place.height, 0, 0, width, height, DARKEST);
 }
 
 function mousePressed() {
 	place.loop();
-	home.loop();
 	kem.loop();
 }
