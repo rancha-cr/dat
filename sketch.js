@@ -8,22 +8,19 @@ let inc = 0.01;
 //
 function preload() {
 	unpaid  = loadTable("/assets/unpaid-hours-gender.csv", "header");
-	// place = loadImage("assets/kyp.jpg");
-	// placeRe = loadImage("assets/kyp-2.png");
-	// gigRe = loadImage("assets/gig-2.png");
-	gig = loadImage('assets/pic-4.jpg');
+	gig = loadImage('assets/img-11.jpg');
 }
 
 function setup() {
 	createCanvas(900, 675);
 	frameRate(30);
 
-	place = createVideo('assets/vid-3.mov');
+	place = createVideo('assets/vid-0.mov');
 	place.hide();
 	home = createVideo('assets/vid-2.mov');
 	home.hide();
 	home.size(16, 16);
-	kem = createVideo('assets/lp-0.mov');
+	kem = createVideo('assets/lp-3.mov');
 	kem.hide();
 	var rowCount = unpaid.getRowCount();
 
@@ -83,7 +80,7 @@ function draw() {
 		//line(width, ver, width - women[i], ver);
 		//copy(width/5, height/5, 24, 24, women[i], ver, width, 4);
 		
-		blend(place, 0, 0, 256, 256, 0, 0, width, height, DIFFERENCE);
+		blend(gig, 0, 0, 256, 256, 0, 0, width, height, DIFFERENCE);
 	}
 }
 
