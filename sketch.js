@@ -1,7 +1,7 @@
 // Instead of lines, draw poles of stacked images. Images match searchwords
 
 //
-var r, g, b, unpaid, place, gig, placeRe, gigRe, home;
+var r, g, b, unpaid, place, gig, placeRe, gigRe, home, kem;
 let country = [], sex = [], value = [], men = [], women = [];
 let inc = 0.01;
 
@@ -10,9 +10,8 @@ function preload() {
 	unpaid  = loadTable("/assets/unpaid-hours-gender.csv", "header");
 	// place = loadImage("assets/kyp.jpg");
 	// placeRe = loadImage("assets/kyp-2.png");
-	// gig = loadImage("assets/gig.jpg");
 	// gigRe = loadImage("assets/gig-2.png");
-	gig = loadImage('assets/pic-2.jpg');
+	gig = loadImage('assets/pic-4.jpg');
 }
 
 function setup() {
@@ -24,6 +23,8 @@ function setup() {
 	home = createVideo('assets/vid-2.mov');
 	home.hide();
 	home.size(16, 16);
+	kem = createVideo('assets/lp-0.mov');
+	kem.hide();
 	var rowCount = unpaid.getRowCount();
 
 	for (var i = 0; i < unpaid.getRowCount(); i++) {
@@ -34,8 +35,6 @@ function setup() {
 			men[i] = unpaid.get(i, 16);
 		} else women[i] = unpaid.get(i, 16);
 	}
-
-	filter(POSTERIZE, 3);
 }
 
 function draw() {
@@ -57,8 +56,8 @@ function draw() {
 	//loadPixels();
 	//place.loadPixels();
 
-	for (var y = 0; y < height; y += 127) {
-		for (var x = 0; x < width; x += random(16)) {
+	//for (var y = 0; y < height; y += 127) {
+	//	for (var x = 0; x < width; x += random(16)) {
 			//if (x % 2 == 0){
 			//	filter(GRAY);
 			//} else if (x % 4 == 0) {
@@ -66,9 +65,11 @@ function draw() {
 			//} else if (x % 3 == 0) {
 			//	filter(ERODE);
 			//}
-			image(place, x, y);
-		}
-	}
+	//		image(place, x, y);
+	//	}
+	//}
+
+	image(kem, 0, 0);
 
 	for (var i = 0; i < country.length; i++) {
 		let hor = (width/country.length) * i;
@@ -82,11 +83,12 @@ function draw() {
 		//line(width, ver, width - women[i], ver);
 		//copy(width/5, height/5, 24, 24, women[i], ver, width, 4);
 		
-		blend(gig, 0, 127, 256, 256, 0, 0, width, height, DODGE);
+		blend(place, 0, 0, 256, 256, 0, 0, width, height, DIFFERENCE);
 	}
 }
 
 function mousePressed() {
 	place.loop();
 	home.loop();
+	kem.loop();
 }
